@@ -14,6 +14,11 @@ var deepObj = {
       e: 'baz'
     };
 
+// Node 4.x & 5.x: "re.exec is not a function"
+// Node 12.x: "undefined is not a function"
+// Node 10.x: "Object #<Object> has no method 'exec'"
+var mismatchedMatchRegex = /(?:(?:re\.exec|undefined) is not a function|Object #<Object> has no method 'exec')/;
+
 
 
 describe( 'chai-deep-match', function() {
@@ -21,10 +26,10 @@ describe( 'chai-deep-match', function() {
   it( 'should not automatically plug into chai', function() {
     expect( 'awesome stringification' ).to.match( /some string/ );
     expect( 'awesome stringification' ).to.deep.match( /some string/ );
-    expect( function() { expect( deepObj ).to.match( deepObj ); } ).to.throw( TypeError, /re\.exec is not a function/ );
-    expect( function() { expect( deepObj ).to.match( { e: 'baz' } ); } ).to.throw( TypeError, /re\.exec is not a function/ );
-    expect( function() { expect( deepObj ).to.deep.match( deepObj ); } ).to.throw( TypeError, /re\.exec is not a function/ );
-    expect( function() { expect( deepObj ).to.deep.match( { e: 'baz' } ); } ).to.throw( TypeError, /re\.exec is not a function/ );
+    expect( function() { expect( deepObj ).to.match( deepObj ); } ).to.throw( TypeError, mismatchedMatchRegex );
+    expect( function() { expect( deepObj ).to.match( { e: 'baz' } ); } ).to.throw( TypeError, mismatchedMatchRegex );
+    expect( function() { expect( deepObj ).to.deep.match( deepObj ); } ).to.throw( TypeError, mismatchedMatchRegex );
+    expect( function() { expect( deepObj ).to.deep.match( { e: 'baz' } ); } ).to.throw( TypeError, mismatchedMatchRegex );
   });
 
 
@@ -37,16 +42,16 @@ describe( 'chai-deep-match', function() {
       // Assert
       expect( 'awesome stringification' ).to.match( /some string/ );
       expect( 'awesome stringification' ).to.deep.match( /some string/ );
-      expect( function() { expect( deepObj ).to.match( deepObj ); } ).to.throw( TypeError, /re\.exec is not a function/ );
-      expect( function() { expect( deepObj ).to.match( { e: 'baz' } ); } ).to.throw( TypeError, /re\.exec is not a function/ );
-      expect( function() { expect( deepObj ).to.deep.match( deepObj ); } ).to.not.throw( TypeError, /re\.exec is not a function/ );
-      expect( function() { expect( deepObj ).to.deep.match( { e: 'baz' } ); } ).to.not.throw( TypeError, /re\.exec is not a function/ );
+      expect( function() { expect( deepObj ).to.match( deepObj ); } ).to.throw( TypeError, mismatchedMatchRegex );
+      expect( function() { expect( deepObj ).to.match( { e: 'baz' } ); } ).to.throw( TypeError, mismatchedMatchRegex );
+      expect( function() { expect( deepObj ).to.deep.match( deepObj ); } ).to.not.throw( TypeError, mismatchedMatchRegex );
+      expect( function() { expect( deepObj ).to.deep.match( { e: 'baz' } ); } ).to.not.throw( TypeError, mismatchedMatchRegex );
     });
 
     it( 'should not interfere with the non-deep `match` assertion', function() {
       expect( 'awesome stringification' ).to.match( /some string/ );
-      expect( function() { expect( deepObj ).to.match( deepObj ); } ).to.throw( TypeError, /re\.exec is not a function/ );
-      expect( function() { expect( deepObj ).to.match( { e: 'baz' } ); } ).to.throw( TypeError, /re\.exec is not a function/ );
+      expect( function() { expect( deepObj ).to.match( deepObj ); } ).to.throw( TypeError, mismatchedMatchRegex );
+      expect( function() { expect( deepObj ).to.match( { e: 'baz' } ); } ).to.throw( TypeError, mismatchedMatchRegex );
     });
 
     it( 'should not interfere with the former deep `match` assertion behavior (which ignores "deep") if the second argument is a RegExp', function() {
