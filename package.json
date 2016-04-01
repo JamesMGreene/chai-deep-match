@@ -1,6 +1,6 @@
 {
   "name": "chai-deep-match",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Extends Chai with an assertion for deeply matching objects (i.e. subset equality checking)",
   "author": {
     "name": "James M. Greene",
@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "deep-keys": "^0.2.0",
-    "lodash": "^4.7.0",
+    "lodash": ">=3.0.0",
     "lodash-pickdeep": "^1.0.2"
   }
 }
