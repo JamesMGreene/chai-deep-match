@@ -33,4 +33,4 @@ chai.expect( { a: 'foo', b: 'bar', c: 'baz' } ).to.not.deep.match( { a: 'fuzz', 
 
 ## License
 
-Copyright (c) 2016, James M. Greene (MIT License)
+Copyright (c) 2016-2018, James M. Greene (MIT License)
