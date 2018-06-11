@@ -2,10 +2,15 @@
 var path = require('path');
 
 
+var nodeMajorMinorVersion = parseFloat( process.version.slice( 1 ) );
+
+
 module.exports = function( grunt ) {
   /*jshint camelcase:false */
 
-  var _coverageMinimum = 70;
+  // Allow a lower coverage goal for Node < 7.0 due to not being able to execute
+  // the WHATWG URL object tests
+  var _coverageMinimum = nodeMajorMinorVersion < 7.0 ? 50 : 70;
   var _coverageGoal = 90;
 
 
