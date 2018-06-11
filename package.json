@@ -26,7 +26,11 @@
     "assertions",
     "match",
     "deep",
-    "isMatch"
+    "isMatch",
+    "contains",
+    "like",
+    "similar",
+    "subset"
   ],
   "main": "index.js",
   "scripts": {
