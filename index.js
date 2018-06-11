@@ -19,7 +19,7 @@ module.exports = function( chai, util ) {
 
       var isDeep = !!util.flag( this, 'deep' );
 
-      if ( isDeep && typeof actual === 'object' && typeof expected === 'object' && ( expected == null || !( expected instanceof RegExp ) ) ) {
+      if ( isDeep && typeof actual === 'object' && typeof expected === 'object' && ( expected == null || Object.prototype.toString.call( expected ) !== '[object RegExp]' ) ) {
         if ( msg ) {
           util.flag( this, 'message', msg );
         }
