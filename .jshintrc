@@ -29,7 +29,7 @@
   "varstmt": false,
   "maxparams": 4,
   "maxdepth": 5,
-  "maxstatements": 30,
+  "maxstatements": 32,
   "maxlen": false,        /* IDEAL: 120? */
 
 
